@@ -1,0 +1,18 @@
+digraph LangGraphRAG {
+  rankdir=LR;
+  graph [fontname="Arial", bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="Arial", color="#333333"];
+  edge [fontname="Arial", color="#333333"];
+  "START" [label="START", fillcolor="#D9EAF7"];
+  "retrieve" [label="retrieve\nFAISS retrieval", fillcolor="#D8F3DC"];
+  "evaluate" [label="evaluate\ncontext grading", fillcolor="#FFF3B0"];
+  "rewrite" [label="rewrite\nquery correction", fillcolor="#FFD6A5"];
+  "answer" [label="answer\nClaude response", fillcolor="#E5D4EF"];
+  "END" [label="END", fillcolor="#EAEAEA"];
+  "START" -> "retrieve" [label="start"];
+  "retrieve" -> "evaluate" [label="documents"];
+  "evaluate" -> "answer" [label="pass"];
+  "evaluate" -> "rewrite" [label="rewrite needed"];
+  "rewrite" -> "retrieve" [label="retry"];
+  "answer" -> "END" [label="final"];
+}

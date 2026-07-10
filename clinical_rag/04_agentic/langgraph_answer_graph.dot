@@ -1,0 +1,25 @@
+digraph DynamicAnswerGraph {
+  rankdir=LR;
+  graph [fontname="Arial", bgcolor="white"];
+  node [shape=box, style="rounded,filled", fontname="Arial", color="#334155"];
+  edge [fontname="Arial", color="#64748b"];
+  "Question" [fillcolor="#dbeafe"];
+  "Retrieve 1" [label="Retrieve 1\nQual foi o resultado da creatinina da paciente Gabriela L...", fillcolor="#dcfce7"];
+  "Question" -> "Retrieve 1" [label="query"];
+  "Evaluate 1" [label="Evaluate 1\ndecision: pass\nrelevance: 0.95", fillcolor="#ffedd5"];
+  "Retrieve 1" -> "Evaluate 1" [label="grade"];
+  "Final Sources" [fillcolor="#ede9fe"];
+  "Evaluate 1" -> "Final Sources" [label="selected"];
+  "Source 1" [label="Source 1\nalta_hospitalar.pdf\np. 2-2", fillcolor="#f5f3ff"];
+  "Final Sources" -> "Source 1" [label="cited"];
+  "Source 2" [label="Source 2\nalta_hospitalar.pdf\np. 1-1", fillcolor="#f5f3ff"];
+  "Final Sources" -> "Source 2" [label="cited"];
+  "Source 3" [label="Source 3\nconsultas_ambulatoriais_0...\np. 2-2", fillcolor="#f5f3ff"];
+  "Final Sources" -> "Source 3" [label="cited"];
+  "Source 4" [label="Source 4\nhemograma_e_bioquimica_03...\np. 4-4", fillcolor="#f5f3ff"];
+  "Final Sources" -> "Source 4" [label="cited"];
+  "Source 5" [label="Source 5\nconsultas_ambulatoriais_0...\np. 1-1", fillcolor="#f5f3ff"];
+  "Final Sources" -> "Source 5" [label="cited"];
+  "Answer" [fillcolor="#cffafe"];
+  "Final Sources" -> "Answer" [label="grounded"];
+}

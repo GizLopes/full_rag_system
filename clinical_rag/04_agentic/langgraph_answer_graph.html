@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Dynamic Answer Graph - Clinical RAG</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f8fafc;
+      font-family: Inter, Arial, sans-serif;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 12px 18px;
+      background: #0f172a;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 2px 12px rgba(0,0,0,.18);
+    }
+    .canvas {
+      padding: 18px;
+      overflow: auto;
+    }
+    svg {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">Dynamic Answer Graph - Clinical RAG Evidence Path</div>
+  <div class="canvas">
+    <svg xmlns="http://www.w3.org/2000/svg" width="1900" height="940" viewBox="0 0 1900 940">
+<defs>
+<marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+</marker>
+<filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+<feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.14"/>
+</filter>
+</defs>
+<rect x="0" y="0" width="100%" height="100%" fill="#f8fafc"/>
+<text x="40" y="34" font-family="Inter, Arial, sans-serif" font-size="18" fill="#0f172a" font-weight="900"><tspan x="40" dy="0">Dynamic Answer Graph</tspan><tspan x="40" dy="22">Clinical RAG evidence path</tspan></text>
+<g filter="url(#shadow)"><g id="question">
+<rect x="40" y="60" width="300" height="142" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="1.3"/>
+<rect x="256" y="72" width="68" height="24" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="0.8" opacity="0.92"/>
+<text x="268" y="89" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="268" dy="0">input</tspan></text>
+<text x="56" y="88" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="56" dy="0">Question</tspan></text>
+<text x="56" y="122" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="56" dy="0">Qual foi o resultado da creatinina</tspan><tspan x="56" dy="16">da paciente Gabriela Lima?</tspan></text>
+</g></g>
+<g filter="url(#shadow)"><g id="retrieve_1">
+<rect x="380" y="60" width="300" height="128" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="1.3"/>
+<rect x="596" y="72" width="68" height="24" rx="12" fill="#ffffff" stroke="#16a34a" stroke-width="0.8" opacity="0.92"/>
+<text x="608" y="89" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="608" dy="0">FAISS</tspan></text>
+<text x="396" y="88" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="396" dy="0">Retrieve attempt 1</tspan></text>
+<text x="396" y="122" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="396" dy="0">Qual foi o resultado da creatinina</tspan><tspan x="396" dy="16">da paciente Gabriela Lima?</tspan></text>
+</g></g>
+<path d="M 340 130 C 360.0 130, 360.0 124, 380 124" fill="none" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrowhead)"/><rect x="308.0" y="104.0" width="104" height="22" rx="11" fill="#ffffff" stroke="#64748b" stroke-width="0.6" opacity="0.95"/><text x="318.0" y="119.0" font-family="Inter, Arial, sans-serif" font-size="10" fill="#64748b" font-weight="700"><tspan x="318.0" dy="0">query</tspan></text>
+<g id="candidate_1_1">
+<rect x="380" y="230" width="300" height="118" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="596" y="242" width="68" height="24" rx="12" fill="#ffffff" stroke="#86efac" stroke-width="0.8" opacity="0.92"/>
+<text x="608" y="259" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="608" dy="0">chunk</tspan></text>
+<text x="396" y="258" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="396" dy="0">Candidate 1</tspan></text>
+<text x="396" y="292" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="396" dy="0">alta_hospitalar.pdf | p. 2-2 |</tspan><tspan x="396" dy="16">score 0.4178 |</tspan><tspan x="396" dy="16">0c535237-380a-5884-826e-0494f0b8a4dd::baseline_chunk_000004</tspan></text>
+</g>
+<path d="M 530.0 188 C 530.0 188, 530.0 230, 530.0 230" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrowhead)"/><rect x="478.0" y="186.0" width="104" height="22" rx="11" fill="#ffffff" stroke="#94a3b8" stroke-width="0.6" opacity="0.95"/><text x="488.0" y="201.0" font-family="Inter, Arial, sans-serif" font-size="10" fill="#94a3b8" font-weight="700"><tspan x="488.0" dy="0">candidate</tspan></text>
+<g id="candidate_1_2">
+<rect x="380" y="368" width="300" height="118" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="596" y="380" width="68" height="24" rx="12" fill="#ffffff" stroke="#86efac" stroke-width="0.8" opacity="0.92"/>
+<text x="608" y="397" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="608" dy="0">chunk</tspan></text>
+<text x="396" y="396" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="396" dy="0">Candidate 2</tspan></text>
+<text x="396" y="430" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="396" dy="0">alta_hospitalar.pdf | p. 1-1 |</tspan><tspan x="396" dy="16">score 0.3130 |</tspan><tspan x="396" dy="16">0c535237-380a-5884-826e-0494f0b8a4dd::baseline_chunk_000002</tspan></text>
+</g>
+<path d="M 530.0 188 C 530.0 188, 530.0 368, 530.0 368" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+<g id="candidate_1_3">
+<rect x="380" y="506" width="300" height="118" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="596" y="518" width="68" height="24" rx="12" fill="#ffffff" stroke="#86efac" stroke-width="0.8" opacity="0.92"/>
+<text x="608" y="535" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="608" dy="0">chunk</tspan></text>
+<text x="396" y="534" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="396" dy="0">Candidate 3</tspan></text>
+<text x="396" y="568" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="396" dy="0">consultas_ambulatoriais_032026.pdf</tspan><tspan x="396" dy="16">| p. 2-2 | score 0.2661 |</tspan><tspan x="396" dy="16">e211d98d-aeed-5695-8e76-e0616475519b::baseline_chunk_000004</tspan></text>
+</g>
+<path d="M 530.0 188 C 530.0 188, 530.0 506, 530.0 506" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+<g id="candidate_1_4">
+<rect x="380" y="644" width="300" height="118" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="596" y="656" width="68" height="24" rx="12" fill="#ffffff" stroke="#86efac" stroke-width="0.8" opacity="0.92"/>
+<text x="608" y="673" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="608" dy="0">chunk</tspan></text>
+<text x="396" y="672" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="396" dy="0">Candidate 4</tspan></text>
+<text x="396" y="706" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="396" dy="0">hemograma_e_bioquimica_032026.pdf</tspan><tspan x="396" dy="16">| p. 4-4 | score 0.2537 |</tspan><tspan x="396" dy="16">a068d410-d37f-513b-a994-f5436d95479c::baseline_chunk_000004</tspan></text>
+</g>
+<path d="M 530.0 188 C 530.0 188, 530.0 644, 530.0 644" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+<g id="candidate_1_5">
+<rect x="380" y="782" width="300" height="118" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+<rect x="596" y="794" width="68" height="24" rx="12" fill="#ffffff" stroke="#86efac" stroke-width="0.8" opacity="0.92"/>
+<text x="608" y="811" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="608" dy="0">chunk</tspan></text>
+<text x="396" y="810" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="396" dy="0">Candidate 5</tspan></text>
+<text x="396" y="844" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="396" dy="0">consultas_ambulatoriais_032026.pdf</tspan><tspan x="396" dy="16">| p. 1-1 | score 0.2513 |</tspan><tspan x="396" dy="16">e211d98d-aeed-5695-8e76-e0616475519b::baseline_chunk_000002</tspan></text>
+</g>
+<path d="M 530.0 188 C 530.0 188, 530.0 782, 530.0 782" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+<g filter="url(#shadow)"><g id="evaluation">
+<rect x="760" y="60" width="300" height="144" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="1.3"/>
+<rect x="976" y="72" width="68" height="24" rx="12" fill="#ffffff" stroke="#16a34a" stroke-width="0.8" opacity="0.92"/>
+<text x="988" y="89" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="988" dy="0">grade</tspan></text>
+<text x="776" y="88" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="776" dy="0">Evaluation</tspan></text>
+<text x="776" y="122" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="776" dy="0">decision: pass | relevance: 0.95 |</tspan><tspan x="776" dy="16">Chunk rank 4 contém evidência</tspan><tspan x="776" dy="16">direta: paciente Gabriela Lima</tspan><tspan x="776" dy="16">(P007), data do exame 2026-03-19,</tspan><tspan x="776" dy="16">creatinina_mg_dl: 1.46</tspan></text>
+</g></g>
+<path d="M 680 124 C 720.0 124, 720.0 134, 760 134" fill="none" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrowhead)"/><rect x="668.0" y="106.0" width="104" height="22" rx="11" fill="#ffffff" stroke="#64748b" stroke-width="0.6" opacity="0.95"/><text x="678.0" y="121.0" font-family="Inter, Arial, sans-serif" font-size="10" fill="#64748b" font-weight="700"><tspan x="678.0" dy="0">grade</tspan></text>
+<g filter="url(#shadow)"><g id="final_sources">
+<rect x="1120" y="60" width="300" height="118" rx="16" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.3"/>
+<rect x="1336" y="72" width="68" height="24" rx="12" fill="#ffffff" stroke="#7c3aed" stroke-width="0.8" opacity="0.92"/>
+<text x="1348" y="89" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="1348" dy="0">context</tspan></text>
+<text x="1136" y="88" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="1136" dy="0">Final selected sources</tspan></text>
+<text x="1136" y="122" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="1136" dy="0">5 chunks selected for answer</tspan><tspan x="1136" dy="16">grounding</tspan></text>
+</g></g>
+<path d="M 1060 134 C 1090.0 134, 1090.0 120, 1120 120" fill="none" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrowhead)"/><rect x="1038.0" y="104.0" width="104" height="22" rx="11" fill="#ffffff" stroke="#7c3aed" stroke-width="0.6" opacity="0.95"/><text x="1048.0" y="119.0" font-family="Inter, Arial, sans-serif" font-size="10" fill="#7c3aed" font-weight="700"><tspan x="1048.0" dy="0">selected</tspan></text>
+<g id="source_1">
+<rect x="1120" y="230" width="300" height="118" rx="16" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.3"/>
+<rect x="1336" y="242" width="68" height="24" rx="12" fill="#ffffff" stroke="#c4b5fd" stroke-width="0.8" opacity="0.92"/>
+<text x="1348" y="259" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="1348" dy="0">cited</tspan></text>
+<text x="1136" y="258" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="1136" dy="0">Source 1</tspan></text>
+<text x="1136" y="292" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="1136" dy="0">alta_hospitalar.pdf | p. 2-2 |</tspan><tspan x="1136" dy="16">chunk 4/6 | alta_hospitalar</tspan></text>
+</g>
+<path d="M 1270.0 178 C 1270.0 178, 1270.0 230, 1270.0 230" fill="none" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#arrowhead)"/><rect x="1218.0" y="181.0" width="104" height="22" rx="11" fill="#ffffff" stroke="#a78bfa" stroke-width="0.6" opacity="0.95"/><text x="1228.0" y="196.0" font-family="Inter, Arial, sans-serif" font-size="10" fill="#a78bfa" font-weight="700"><tspan x="1228.0" dy="0">cited</tspan></text>
+<g id="source_2">
+<rect x="1120" y="368" width="300" height="118" rx="16" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.3"/>
+<rect x="1336" y="380" width="68" height="24" rx="12" fill="#ffffff" stroke="#c4b5fd" stroke-width="0.8" opacity="0.92"/>
+<text x="1348" y="397" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="1348" dy="0">cited</tspan></text>
+<text x="1136" y="396" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="1136" dy="0">Source 2</tspan></text>
+<text x="1136" y="430" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="1136" dy="0">alta_hospitalar.pdf | p. 1-1 |</tspan><tspan x="1136" dy="16">chunk 2/6 | alta_hospitalar</tspan></text>
+</g>
+<path d="M 1270.0 178 C 1270.0 178, 1270.0 368, 1270.0 368" fill="none" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+<g id="source_3">
+<rect x="1120" y="506" width="300" height="118" rx="16" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.3"/>
+<rect x="1336" y="518" width="68" height="24" rx="12" fill="#ffffff" stroke="#c4b5fd" stroke-width="0.8" opacity="0.92"/>
+<text x="1348" y="535" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="1348" dy="0">cited</tspan></text>
+<text x="1136" y="534" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="1136" dy="0">Source 3</tspan></text>
+<text x="1136" y="568" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="1136" dy="0">consultas_ambulatoriais_032026.pdf</tspan><tspan x="1136" dy="16">| p. 2-2 | chunk 4/7 |</tspan><tspan x="1136" dy="16">consultas_ambulatoriais</tspan></text>
+</g>
+<path d="M 1270.0 178 C 1270.0 178, 1270.0 506, 1270.0 506" fill="none" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+<g id="source_4">
+<rect x="1120" y="644" width="300" height="118" rx="16" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.3"/>
+<rect x="1336" y="656" width="68" height="24" rx="12" fill="#ffffff" stroke="#c4b5fd" stroke-width="0.8" opacity="0.92"/>
+<text x="1348" y="673" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="1348" dy="0">cited</tspan></text>
+<text x="1136" y="672" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="1136" dy="0">Source 4</tspan></text>
+<text x="1136" y="706" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="1136" dy="0">hemograma_e_bioquimica_032026.pdf</tspan><tspan x="1136" dy="16">| p. 4-4 | chunk 4/5 |</tspan><tspan x="1136" dy="16">hemograma_e_bioquimica</tspan></text>
+</g>
+<path d="M 1270.0 178 C 1270.0 178, 1270.0 644, 1270.0 644" fill="none" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+<g id="source_5">
+<rect x="1120" y="782" width="300" height="118" rx="16" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.3"/>
+<rect x="1336" y="794" width="68" height="24" rx="12" fill="#ffffff" stroke="#c4b5fd" stroke-width="0.8" opacity="0.92"/>
+<text x="1348" y="811" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="1348" dy="0">cited</tspan></text>
+<text x="1136" y="810" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="1136" dy="0">Source 5</tspan></text>
+<text x="1136" y="844" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="1136" dy="0">consultas_ambulatoriais_032026.pdf</tspan><tspan x="1136" dy="16">| p. 1-1 | chunk 2/7 |</tspan><tspan x="1136" dy="16">consultas_ambulatoriais</tspan></text>
+</g>
+<path d="M 1270.0 178 C 1270.0 178, 1270.0 782, 1270.0 782" fill="none" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#arrowhead)"/>
+<g filter="url(#shadow)"><g id="answer">
+<rect x="1500" y="60" width="340" height="196" rx="16" fill="#cffafe" stroke="#0891b2" stroke-width="1.3"/>
+<rect x="1756" y="72" width="68" height="24" rx="12" fill="#ffffff" stroke="#0891b2" stroke-width="0.8" opacity="0.92"/>
+<text x="1768" y="89" font-family="Inter, Arial, sans-serif" font-size="11" fill="#334155" font-weight="700"><tspan x="1768" dy="0">final</tspan></text>
+<text x="1516" y="88" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="800"><tspan x="1516" dy="0">Answer</tspan></text>
+<text x="1516" y="122" font-family="Inter, Arial, sans-serif" font-size="12" fill="#334155" font-weight="500"><tspan x="1516" dy="0">**Resultado da creatinina da</tspan><tspan x="1516" dy="16">paciente Gabriela Lima:** **1,46</tspan><tspan x="1516" dy="16">mg/dL** --- **Detalhes do exame:**</tspan><tspan x="1516" dy="16">- **Data do exame:** 19/03/2026 -</tspan><tspan x="1516" dy="16">**Paciente:** Gabriela Lima (ID...</tspan></text>
+</g></g>
+<path d="M 1420 120 C 1460.0 120, 1460.0 138, 1500 138" fill="none" stroke="#0891b2" stroke-width="1.8" marker-end="url(#arrowhead)"/><rect x="1408.0" y="106.0" width="104" height="22" rx="11" fill="#ffffff" stroke="#0891b2" stroke-width="0.6" opacity="0.95"/><text x="1418.0" y="121.0" font-family="Inter, Arial, sans-serif" font-size="10" fill="#0891b2" font-weight="700"><tspan x="1418.0" dy="0">grounded</tspan></text>
+<text x="40" y="920" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569" font-weight="700"><tspan x="40" dy="0">Legend: blue=input | green=retrieval | orange=correction | purple=sources | cyan=final answer</tspan></text>
+</svg>
+  </div>
+</body>
+</html>

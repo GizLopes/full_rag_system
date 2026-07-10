@@ -1,0 +1,20 @@
+boto3>=1.40.0                    # SDK oficial da AWS para Python
+botocore>=1.40.0                 # Núcleo de autenticação e APIs do boto3
+streamlit>=1.48.0                # Framework para interfaces web em Python
+langchain>=0.3.0                 # Framework para aplicações com LLMs
+langchain-community>=0.3.0       # Integrações da comunidade para LangChain
+langchain-text-splitters>=0.3.0  # Utilitários para chunking de documentos
+langchain-aws>=0.2.0             # Integração LangChain com serviços AWS
+opensearch-py>=2.8.0             # Cliente Python para OpenSearch
+pypdf>=5.0.0                     # Extração de texto de arquivos PDF
+python-docx>=1.1.0               # Leitura e escrita de arquivos DOCX
+pandas>=2.3.0                    # Manipulação de dados tabulares
+numpy>=2.3.0                     # Computação numérica com arrays
+tqdm>=4.67.0                     # Barra de progresso para loops
+python-dotenv>=1.1.0             # Carrega variáveis de ambiente do .env
+tiktoken>=0.4.0                  # Tokenização compatível com modelos LLM
+faiss-cpu>=1.7.4                 # Busca vetorial por similaridade local
+
+# Libs adicionadas
+langgraph>=0.3.0                 # Framework para grafos de conhecimento a partir de LLMs
+matplotlib networkx>=3.1.0       # Visualização de grafos

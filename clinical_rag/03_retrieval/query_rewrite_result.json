@@ -1,0 +1,44 @@
+{
+  "original_question": "Qual foi o resultado da creatinina da paciente Gabriela Lima?",
+  "normalized_question": "resultado creatinina paciente Gabriela Lima",
+  "rewritten_question": "creatinina sérica Gabriela Lima resultado valor exame bioquímica função renal",
+  "patient_name": "Gabriela Lima",
+  "patient_id": null,
+  "clinical_terms": [
+    "creatinina",
+    "creatinina sérica",
+    "função renal",
+    "bioquímica",
+    "ureia",
+    "clearance de creatinina"
+  ],
+  "target_document_types": [
+    "hemograma_e_bioquimica"
+  ],
+  "target_sections": [
+    "bioquímica",
+    "função renal",
+    "resultados laboratoriais"
+  ],
+  "expanded_queries": [
+    "creatinina Gabriela Lima",
+    "resultado bioquímica creatinina sérica Gabriela Lima",
+    "função renal creatinina paciente Gabriela Lima",
+    "exames laboratoriais bioquímica creatinina",
+    "valores creatinina sérica Gabriela Lima"
+  ],
+  "keyword_query": "creatinina AND \"Gabriela Lima\" AND (resultado OR valor OR mg/dL)",
+  "retrieval_filters": {
+    "patient_name": "Gabriela Lima",
+    "patient_id": null,
+    "document_type": [
+      "hemograma_e_bioquimica"
+    ],
+    "clinical_section": [
+      "bioquímica",
+      "função renal",
+      "resultados laboratoriais"
+    ]
+  },
+  "reasoning_summary": "Busca por resultado de exame laboratorial específico (creatinina) para paciente identificada. Expandido com termos relacionados à função renal e bioquímica. Filtros aplicados para documento de hemograma_e_bioquimica e seções de bioquímica."
+}
