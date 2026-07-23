@@ -1,31 +1,30 @@
 # Clinical Knowledge RAG Assistant
-RAG clínico end-to-end com documentos sintéticos em PDF, Amazon S3, chunking, Amazon Bedrock Titan Embeddings,
-FAISS, Claude via Bedrock, LangGraph, agentes, avaliação offline, LLM as a Judge e Streamlit.
+End-to-end clinical RAG with synthetic PDF documents, Amazon S3, chunking, Amazon Bedrock Titan Embeddings,
+FAISS, Claude via Bedrock, LangGraph, agents, offline evaluation, LLM as a Judge, and Streamlit.
 
-O projeto evolui de um RAG baseline para técnicas mais avançadas, incluindo chunking semântico, query rewriting, hybrid search,
-RAG Fusion, Corrective RAG, ReAct Agent, avaliação de retrieval, avaliação de resposta, curadoria de logs reais e dashboard comparativo
-baseline versus semantic.
+The project evolves from a baseline RAG to more advanced techniques, including semantic chunking, query rewriting, hybrid search, RAG Fusion, Corrective RAG, ReAct Agent, retrieval evaluation, answer evaluation, real-log curation, and a comparative dashboard (baseline vs. semantic).
 
-## Objetivo do case
-Demonstrar uma arquitetura prática de RAG clínico usando dados sintéticos para:
-- Recuperar evidências clínicas a partir de documentos PDF.
-- Gerar respostas com citação de fontes, páginas e chunks.
-- Comparar estratégias de chunking e retrieval.
-- Avaliar qualidade com métricas como Recall@K, MRR e Precision@K.
-- Avaliar respostas com critérios de groundedness, correctness, citation quality e hallucination risk.
-- Registrar interações reais via Streamlit para futura curadoria.
+## Case Objective
+Demonstrate a practical clinical RAG architecture using synthetic data to:
+- Retrieve clinical evidence from PDF documents.
+- Generate responses citing sources, pages, and chunks.
+- Compare chunking and retrieval strategies.
+- Evaluate quality using metrics such as Recall@K, MRR, and Precision@K.
+- Evaluate responses against criteria including groundedness, correctness, citation quality, and hallucination risk.
+- Log real interactions via Streamlit for future curation.
 
-## Arquivos
+## Files
 - consultas_ambulatoriais_032026
 - hemograma_e_bioquimica_032026
 - ressonancia_coluna
 - parecer_cardiologista
 - alta_hospitalar
-## Detalhes
-- csv/: dados consolidados por tema, com 10 pacientes por arquivo.
-- pdf/: documentos simulados para ingestao via RAG, incluindo laudos com elementos visuais simples.
 
-## Estrutura do projeto
+## Details
+- csv/: consolidated data by topic, with 10 patients per file.
+- pdf/: simulated documents for ingestion via RAG, including reports with simple visual elements.
+
+## Project Structure
 
 ```text
 clinical_rag/
@@ -34,7 +33,7 @@ clinical_rag/
 │   ├── csv/
 │
 ├── 01_database/
-│   └── documentos clínicos sintéticos em PDF
+│   └── synthetic clinical PDF documents
 │
 ├── 02_processing/
 │   ├── 00_upload_s3.py
@@ -71,9 +70,9 @@ clinical_rag/
     └── interaction_logs.jsonl
 ```
 
-## Documentos sintéticos
+## Synthetic Documents
 
-Arquivos clínicos simulados usados no case:
+Simulated clinical files used in the case:
 
 ```text
 consultas_ambulatoriais_032026.pdf
@@ -83,56 +82,56 @@ parecer_cardiologista.pdf
 alta_hospitalar.pdf
 ```
 
-## Componentes principais
+## Main Components
 
 ### 00_ground_truth/
-Contém dados sintéticos consolidados por tema e CSVs simulados.
+Contains synthetic data consolidated by topic and simulated CSVs.
 
 ### 01_database/
-Contém os PDFs clínicos sintéticos usados como base documental para ingestão no RAG.
-Essa camada representa a origem controlada dos dados usados no treinamento e nos testes.
+Contains the synthetic clinical PDFs used as the document base for RAG ingestion.
+This layer represents the controlled source of data used in training and testing.
 
 ### 02_processing/
-Responsável por ingestão, chunking, embeddings e indexação.
+Responsible for ingestion, chunking, embeddings, and indexing.
 
-Arquivos principais:
+Main files:
 ```text
 00_upload_s3.py
 ```
-Envia PDFs para o bucket S3.
+Uploads PDFs to the S3 bucket.
 
 ```text
 01_chunking_baseline.py
 ```
-Cria chunks baseline por página e tokens.
+Creates baseline chunks by page and tokens.
 
 ```text
 02_chunking_semantic.py
 ```
-Cria chunks semânticos por paciente, seção clínica e estrutura documental.
+Creates semantic chunks by patient, clinical section, and document structure.
 
 ```text
 03_generate_embeddings_baseline.py
 ```
-Gera embeddings Titan para chunks baseline.
+Generates Titan embeddings for baseline chunks.
 
 ```text
 03_generate_embeddings_semantic.py
 ```
-Gera embeddings Titan para chunks semânticos.
+Generates Titan embeddings for semantic chunks.
 
 ```text
 04_indexing.py
 ```
-Cria índices FAISS baseline e semantic e salva os artefatos localmente e no S3.
+Creates baseline and semantic FAISS indices and saves artifacts locally and to S3.
 
-## Artefatos no S3
-Bucket usado no projeto:
+## S3 Artifacts
+Bucket used in the project:
 ```text
 clinical-rag-database
 ```
 
-Principais prefixos:
+Main prefixes:
 ```text
 rag-database/
 chunks/
@@ -144,52 +143,52 @@ index_semantic/
 ```
 
 ## 03_retrieval/
-Contém as estratégias de recuperação e geração de resposta:
+Contains retrieval and response generation strategies:
 
 ```text
 01_baseline_rag.py
 ```
-Executa RAG baseline com Titan Embeddings, FAISS e Claude.
+Executes baseline RAG with Titan Embeddings, FAISS, and Claude.
 
 ```text
 02_query_rewrite.py
 ```
-Reescreve perguntas clínicas para melhorar o retrieval.
+Rewrites clinical queries to improve retrieval.
 
 ```text
 03_hybrid_search.py
 ```
-Combina busca vetorial FAISS com busca lexical BM25 e Reciprocal Rank Fusion.
+Combines FAISS vector search with BM25 lexical search and Reciprocal Rank Fusion.
 
 ```text
 04_rag_fusion.py
 ```
-Gera múltiplas queries, executa retrieval por query e consolida resultados com RRF.
+Generates multiple queries, executes retrieval per query, and consolidates results using RRF.
 
 ```text
 05_corrective_rag.py
 ```
-Avalia contexto recuperado, reescreve a query se necessário e executa nova recuperação.
+Evaluates retrieved context, rewrites the query if necessary, and executes a new retrieval.
 
 ## 04_agentic/
-Contém orquestração agentic:
+Contains agentic orchestration:
 ```text
 01_langgraph_rag.py
 ```
-Orquestra o fluxo RAG com LangGraph:
+Orchestrates the RAG flow with LangGraph:
 ```text
 retrieve
 evaluate
-rewrite, se necessário
+rewrite, if necessary
 answer
 ```
 
-Também pode gerar grafo visual dinâmico da resposta, evidências, avaliação e fontes.
+Can also generate a dynamic visual graph of the answer, evidence, evaluation, and sources.
 ```text
 02_react_agent.py
 ```
 
-Executa agente ReAct com ferramentas:
+Executes ReAct agent with tools:
 ```text
 retrieve_baseline
 retrieve_semantic
@@ -198,13 +197,13 @@ final_answer
 ```
 
 ## 05_evaluation/
-Contém avaliação offline do RAG.
+Contains offline RAG evaluation.
 ```text
 00_ground_truth_evaluation_dataset.py
 ```
 
-Gera dataset ground truth em JSONL para avaliação offline.
-Saída:
+Generates ground truth dataset in JSONL for offline evaluation.
+Output:
 ```text
 ground_truth_evaluation_dataset.jsonl
 ```
@@ -213,7 +212,7 @@ ground_truth_evaluation_dataset.jsonl
 01_evaluate_retrieval.py
 ```
 
-Avalia retrieval baseline versus semantic com:
+Evaluates baseline versus semantic retrieval using:
 ```text
 Recall@K
 MRR
@@ -222,7 +221,7 @@ Hit rank
 Best score
 ```
 
-Saída principal:
+Main output:
 ```text
 retrieval_eval_results.jsonl
 ```
@@ -231,17 +230,17 @@ retrieval_eval_results.jsonl
 02_evaluate_answer.py
 ```
 
-Avalia a resposta final do RAG contra o ground truth.
-Critérios:
+Evaluates the final RAG answer against the ground truth.
+Criteria:
 ```text
-termos esperados
-paciente
-documento
-citação
-fonte compatível
+expected terms
+patient
+document
+citation
+compatible source
 ```
 
-Saída:
+Output:
 ```text
 answer_eval_results.jsonl
 ```
@@ -250,7 +249,7 @@ answer_eval_results.jsonl
 03_llm_as_judge.py
 ```
 
-Usa Claude como juiz para avaliar:
+Uses Claude as a judge to evaluate:
 ```text
 groundedness
 correctness
@@ -260,7 +259,7 @@ hallucination risk
 overall score
 ```
 
-Saída:
+Output:
 ```text
 llm_judge_results.jsonl
 ```
@@ -269,13 +268,13 @@ llm_judge_results.jsonl
 04_UI_convert_interaction_logs.py
 ```
 
-Converte logs reais do Streamlit em candidatos para curadoria.
-Entrada:
+Converts real Streamlit logs into candidates for curation.
+Input:
 ```text
 ../06_app_ui/interaction_logs.jsonl
 ```
 
-Saída:
+Output:
 ```text
 curation_candidates.jsonl
 ```
@@ -284,8 +283,8 @@ curation_candidates.jsonl
 05_UI_curate_ground_truth_dataset.py
 ```
 
-Transforma candidatos derivados do Streamlit em ground truth curado.
-Saídas:
+Transforms candidates derived from Streamlit into a curated ground truth.
+Outputs:
 ```text
 curation_review_template.jsonl
 curated_ground_truth_dataset.jsonl
@@ -295,60 +294,60 @@ curated_ground_truth_dataset.jsonl
 06_UI_merge_evaluation_datasets.py
 ```
 
-Une o dataset seed com o dataset curado real.
-Entradas:
+Merges the seed dataset with the real curated dataset.
+Inputs:
 ```text
 ground_truth_evaluation_dataset.jsonl
 curated_ground_truth_dataset.jsonl
 ```
 
-Saída:
+Output:
 ```text
 full_ground_truth_evaluation_dataset.jsonl
 ```
 
 ## 06_app_ui/
-Contém as interfaces Streamlit e logging real das interações.
+Contains Streamlit interfaces and real interaction logging.
 ```text
 00_streamlit.py
 ```
-Interface principal para perguntas clínicas.
-Fluxo:
+Main interface for clinical questions.
+Flow:
 ```text
-pergunta clínica
-retrieval FAISS baseline ou semantic
+clinical question
+baseline or semantic FAISS retrieval
 Claude via Bedrock
-resposta com fontes
-registro em interaction_logs.jsonl
-feedback do usuário
-marcação para curadoria
+response with sources
+logging in interaction_logs.jsonl
+user feedback
+curation flagging
 ```
 
 ```text
 interaction_logger.py
 ```
-Módulo usado pelo Streamlit para:
+Module used by Streamlit to:
 ```text
-criar interaction_id
-registrar interaction_logs.jsonl
-contar interações
-atualizar feedback
-marcar curadoria
-exportar candidatos
+create interaction_id
+log to interaction_logs.jsonl
+count interactions
+update feedback
+flag curation
+export candidates
 ```
 
 ```text
 02_dev_evaluation_dashboard.py
 ```
-Dashboard de desenvolvimento para comparar baseline versus semantic.
-Lê:
+Development dashboard to compare baseline versus semantic.
+Reads:
 ```text
 ../05_evaluation/retrieval_eval_results.jsonl
 ../05_evaluation/answer_eval_results.jsonl
 ../05_evaluation/llm_judge_results.jsonl
 ```
 
-Mostra:
+Displays:
 ```text
 Recall@K
 MRR
@@ -362,44 +361,44 @@ Citation quality
 Hallucination risk
 ```
 
-## Passo a passo simplificado
-### 1. Subir PDFs no S3
+## Step-by-Step Guide
+### 1. Upload PDFs to S3
 ```powershell
 cd clinical_rag/02_processing
 python 00_upload_s3.py
 ```
 
-### 2. Gerar chunks
+### 2. Generate chunks
 ```powershell
 python 01_chunking_baseline.py
 python 02_chunking_semantic.py
 ```
 
-### 3. Gerar embeddings
+### 3. Generate embeddings
 ```powershell
 python 03_generate_embeddings_baseline.py
 python 03_generate_embeddings_semantic.py
 ```
 
-### 4. Criar índices FAISS
+### 4. Create FAISS indices
 ```powershell
 python 04_indexing_faiss.py
 ```
 
-Ou por índice:
+Or by index:
 
 ```powershell
 python 04_indexing_faiss.py --only baseline
 python 04_indexing_faiss.py --only semantic
 ```
 
-### 5. Rodar retrieval baseline
+### 5. Run baseline retrieval
 ```powershell
 cd ../03_retrieval
 python 01_baseline_rag.py --question "Qual foi o resultado da creatinina da paciente Gabriela Lima?"
 ```
 
-### 6. Rodar estratégias avançadas de retrieval
+### 6. Run advanced retrieval strategies
 ```powershell
 python 02_query_rewrite.py --question "Qual foi o resultado da creatinina da paciente Gabriela Lima?"
 python 03_hybrid_search.py --question "Qual foi o resultado da creatinina da paciente Gabriela Lima?"
@@ -407,14 +406,14 @@ python 04_rag_fusion.py --question "Qual foi o resultado da creatinina da pacien
 python 05_corrective_rag.py --question "Qual foi o resultado da creatinina da paciente Gabriela Lima?"
 ```
 
-### 7. Rodar LangGraph e ReAct Agent
+### 7. Run LangGraph and ReAct Agent
 ```powershell
 cd ../04_agentic
 python 01_langgraph_rag.py --question "Qual foi o resultado da creatinina da paciente Gabriela Lima?"
 python 02_react_agent.py --question "Qual foi o resultado da creatinina da paciente Gabriela Lima?"
 ```
 
-### 8. Rodar avaliação offline
+### 8. Run offline evaluation
 ```powershell
 cd ../05_evaluation
 python 00_ground_truth_evaluation_dataset.py
@@ -423,19 +422,19 @@ python 02_evaluate_answer.py
 python 03_llm_as_judge.py
 ```
 
-### 9. Rodar Streamlit principal
+### 9. Run main Streamlit app
 ```powershell
 cd ../06_app_ui
 streamlit run 00_streamlit.py
 ```
 
-### 10. Rodar dashboard dev de avaliação
+### 10. Run dev evaluation dashboard
 ```powershell
 streamlit run 02_dev_evaluation_dashboard.py
 ```
 
-## Fluxo com logs reais do Streamlit
-Depois de usar o Streamlit principal e gerar `interaction_logs.jsonl`:
+## Workflow with Real Streamlit Logs
+After using the main Streamlit interface and generating `interaction_logs.jsonl`:
 
 ```powershell
 cd ../05_evaluation
@@ -444,14 +443,14 @@ python 05_UI_curate_ground_truth_dataset.py
 python 06_UI_merge_evaluation_datasets.py
 ```
 
-Depois rode avaliações com o dataset completo:
+Then run evaluations using the full dataset:
 ```powershell
 python 01_evaluate_retrieval.py --eval-file full_ground_truth_evaluation_dataset.jsonl
 python 02_evaluate_answer.py --eval-file full_ground_truth_evaluation_dataset.jsonl
 python 03_llm_as_judge.py
 ```
 
-## Perguntas de teste
+## Test Questions
 ```text
 Quais medicamentos o paciente P001 utiliza atualmente?
 Qual foi o último resultado de creatinina da Ana Ribeiro?
@@ -465,41 +464,41 @@ Qual foi a glicemia de Elisa Costa no exame laboratorial?
 Qual medicação aparece para Fabio Oliveira na alta hospitalar?
 ```
 
-## Métricas de avaliação
+## Evaluation Metrics
 ### Recall@K
-Mede se o item esperado apareceu entre os K primeiros resultados.
+Measures whether the expected item appeared among the top K results.
 ```text
-Recall@K = perguntas com acerto no Top-K / total de perguntas
+Recall@K = questions with a hit in Top-K / total questions
 ```
 
 ### MRR
-Mede quão cedo aparece o primeiro resultado relevante.
+Measures how early the first relevant result appears.
 ```text
-MRR = média de 1 / rank do primeiro resultado relevante
+MRR = average of 1 / rank of the first relevant result
 ```
 
 ### Precision@K
-Mede a proporção de resultados relevantes dentro do Top-K.
+Measures the proportion of relevant results within Top-K.
 ```text
-Precision@K = itens relevantes no Top-K / K
+Precision@K = relevant items in Top-K / K
 ```
 
 ### Groundedness
-Mede se a resposta está suportada pelas fontes recuperadas.
+Measures whether the answer is supported by the retrieved sources.
 
 ### Correctness
-Mede se a resposta está correta em relação ao ground truth.
+Measures whether the answer is correct relative to the ground truth.
 
 ### Citation quality
-Mede se documento, página e chunk foram citados corretamente.
+Measures whether document, page, and chunk were cited correctly.
 
 ### Hallucination risk
-Classifica o risco de a resposta conter informação não sustentada pelas fontes.
+Classifies the risk of the answer containing information unsupported by sources.
 
-## Observações importantes
-- O projeto usa dados sintéticos.
-- Não há dados reais de pacientes.
-- Não deve ser usado para diagnóstico, triagem clínica real ou decisão médica.
-- O objetivo é demonstrar arquitetura, retrieval, avaliação e rastreabilidade.
-- O dashboard dev usa arquivos JSONL, não JSON, para as avaliações principais.
-- A pasta `06_app_ui/` substitui a antiga `06_app/`.
+## Important Notes
+- The project uses synthetic data.
+- There are no real patient data.
+- It must not be used for diagnosis, real clinical triage, or medical decision-making.
+- The objective is to demonstrate architecture, retrieval, evaluation, and traceability.
+- The dev dashboard uses JSONL files, not JSON, for primary evaluations.
+- The `06_app_ui/` folder replaces the legacy `06_app/`.
